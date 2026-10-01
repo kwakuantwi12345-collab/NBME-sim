@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NBME Exam Simulator</title>
+  <meta name="description" content="Turn an NBME/USMLE exam PDF into a timed, NBME-style practice block with scoring and AI explanations. Runs entirely in your browser.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🩺 NBME Exam Simulator</div>
+    <button id="settingsToggle" class="btn ghost small" aria-expanded="false" aria-controls="sidebar">🤖 AI: Off</button>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar" class="sidebar">
+      <section class="panel">
+        <h2>🤖 AI explanations <span class="muted">(optional)</span></h2>
+        <div class="seg" role="radiogroup" aria-label="AI explanations">
+          <label><input type="radio" name="aiMode" value="off" checked> Off</label>
+          <label><input type="radio" name="aiMode" value="on"> On</label>
+        </div>
+        <p class="muted small" id="aiOffNote">The app works fully without AI. Use an answer key, or mark the correct answers yourself in the report.</p>
+        <div id="aiFields" hidden>
+          <label>Provider
+            <select id="provider">
+              <option value="Anthropic">Anthropic (Claude)</option>
+              <option value="OpenAI">OpenAI</option>
+            </select>
+          </label>
+          <label>API key
+            <input id="apiKey" type="password" name="llm-api-key" autocomplete="new-password" data-lpignore="true" data-1p-ignore placeholder="Paste your API key">
+          </label>
+          <label>Model
+            <input id="model" type="text" autocomplete="off">
+          </label>
+          <label class="check"><input id="rememberKey" type="checkbox"> Remember key on this device</label>
+          <p id="aiStatus" class="muted small"></p>
+          <p class="muted small">Your key and questions go straight from your browser to the provider. This site has no server and never sees them.</p>
+        </div>
+      </section>
+      <section id="navPanel" class="panel" hidden>
+        <h2>Navigator</h2>
+        <p id="navSummary" class="muted small"></p>
+        <div id="navGrid" class="navgrid"></div>
+        <p class="muted small">Keys: A–H answer · ←/→ move · M mark</p>
+      </section>
+    </aside>
+
+    <main id="app" class="main" tabindex="-1"></main>
+  </div>
+
+  <noscript><p style="padding:2rem">This app needs JavaScript enabled.</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
